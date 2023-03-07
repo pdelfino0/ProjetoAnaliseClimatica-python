@@ -32,13 +32,13 @@ def get_nome_mes(mes):
     return nomes_meses[mes - 1] # retorna o nome do mês correspondente ao número passado como parâmetro, subtraindo 1 para ajustar ao índice da lista.
 
 # Define uma função para imprimir os resultados da pesquisa de temperatura máxima nos primeiros 7 dias de cada mês em um ano específico.
-def print_resultado_pesquisa_temperatura(result_list):
+def print_resultado_pesquisa_temperatura(lista_resultante):
     cont = 0 # contador de dias para imprimir o nome do próximo mês após 7 dias
     cont_meses = 2 # contador de meses para imprimir o nome do próximo mês
     print("Janeiro") # imprime o nome do primeiro mês
 
     # Itera sobre a lista de resultados
-    for i in result_list:
+    for i in lista_resultante:
         # Verifica se a data corresponde aos primeiros 7 dias do mês atual
         if i[0][:2] == "07" and i[0][3:5] == "12": 
             # Se a data estiver dentro dos primeiros 7 dias do mês atual, imprime a data e a temperatura máxima registrada para essa data
@@ -62,22 +62,22 @@ def opcao_precipitação():
     
     
     #funções alinhadas devem ficar dentro da função principal
-    def print_search_result(result_list):
-            for i in result_list:
+    def print_search_result(lista_resultante):
+            for i in lista_resultante:
                 print(f"No dia {i[0]} a precipitação foi de: {i[1]}")
                 print()
     # define a função search_precipitation para procurar por informações de precipitação de um determinado ano e mês
     #funções alinhadas devem ficar dentro da função principal
     
-    def search_precipitation(year, month):
+    def search_precipitation(ano, mes):
         
-        result_list = []
-        # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a result_list
+        lista_resultante = []
+        # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a lista_resultante
         for i in range(len(day_list)):
-            if ((day_list[i][0][6:]) == str(year)) and ((day_list[i][0][4:5]) == str(month)):
-                result_list.append((day_list[i][0],day_list[i][1][0]))
+            if ((day_list[i][0][6:]) == str(ano)) and ((day_list[i][0][4:5]) == str(mes)):
+                lista_resultante.append((day_list[i][0],day_list[i][1][0]))
         # chama a função print_search_result para exibir os resultados
-        print_search_result(result_list)
+        print_search_result(lista_resultante)
 
 
     print("Selecione um mês e um ano:")
@@ -115,17 +115,17 @@ def busca_temperatura_maxima():
     
     dias = "01,02,03,04,05,06,07"
     meses = "01,02,03,04,05,06,07,08,09,10,11,12"
-    result_list = []
+    lista_resultante = []
     
     # Um loop for é usado para verificar se a data correspondente em day_list (uma lista de tuplas contendo datas e temperaturas) atende aos critérios de busca.
-    # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a result_list
+    # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a lista_resultante
     for i in range(len(day_list)):
         # Se a data corresponder aos critérios, ela é adicionada a uma lista de resultados.
         if (day_list[i][0][6:]) == str(ano) and (day_list[i][0][4:5] in meses) and (day_list[i][0][:2] in dias):
-            result_list.append((day_list[i][0], day_list[i][1][1]))
+            lista_resultante.append((day_list[i][0], day_list[i][1][1]))
             
     # Por fim, a função chama outra função para imprimir os resultados da pesquisa.
-    print_resultado_pesquisa_temperatura(result_list)
+    print_resultado_pesquisa_temperatura(lista_resultante)
 
 
 
