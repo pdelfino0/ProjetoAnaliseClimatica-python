@@ -1,15 +1,9 @@
 def load_data(file_name):
     with open(file_name) as f:
-        f.readline()  # ignorar a primeira linha
+        # ignorar a primeira linha
+        f.readline()
         data = [line.strip().split(";") for line in f]
         return data
-
-
-def is_leap_year(year):
-    if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0):
-        return True
-    else:
-        return False
 
 
 data = load_data("ArquivoDadosProjeto.csv")
@@ -22,11 +16,10 @@ for line in data:
     day_list.append(day)
 
 
-def seach_precipitation(year, month):
+def search_precipitation(year, month):
     result_list = []
     for i in range(len(day_list)):
         if ((day_list[i][0][6:]) == str(year)) and ((day_list[i][0][4:5]) == str(month)):
-            # print((day_list[i][0][6:]))
             result_list.append((day_list[i]))
     print_search_result(result_list)
 
@@ -36,6 +29,46 @@ def print_search_result(result_list):
         print()
         print(i)
 
+# função auxiliar para obter o nome do mês
 
-teste = seach_precipitation(1961, 4)
-print(teste)
+
+def get_nome_mes(mes):
+    nomes_meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+    return nomes_meses[mes - 1]
+
+
+# exibindo o menu para o usuário
+print("Selecione um mês e um ano:")
+print("1 - Janeiro")
+print("2 - Fevereiro")
+print("3 - Março")
+print("4 - Abril")
+print("5 - Maio")
+print("6 - Junho")
+print("7 - Julho")
+print("8 - Agosto")
+print("9 - Setembro")
+print("10 - Outubro")
+print("11 - Novembro")
+print("12 - Dezembro")
+
+# solicitando ao usuário que selecione um mês
+#mes = int(input("Digite o número do mês desejado: "))
+mes = 0
+while mes < 1 or mes > 12:
+    mes = int(input("Digite o número do mês desejado: "))
+    if mes < 1 or mes > 12:
+        print("Valor inválido! Tente novamente.")
+
+
+# solicitando ao usuário que insira o ano
+ano = int(input("Digite o ano desejado: "))
+
+# exibindo o resultado
+print("Você selecionou o mês de", get_nome_mes(mes), "de", ano)
+
+search_precipitation(ano, mes)
+
+
+
