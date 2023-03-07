@@ -20,21 +20,20 @@ for line in data:
                     line[4], line[5], line[6], line[7])
     day = [line[0], informations]
     day_list.append(day)
-'''
-for i in range(len(day_list)):
-    print((day_list[i][0][6:]))'''
-
-#print(teste)
-#print(len(day_list[1]))
 
 
 def seach_precipitation( year, month):
     result_list = []
     for i in range(len(day_list)):
-        if (day_list[i][0][6:]) == str(year):
+        if ((day_list[i][0][6:]) == str(year)) and ((day_list[i][0][6:]) == str(month)):
             #print((day_list[i][0][6:]))
             result_list.append((day_list[i]))
-    return result_list
+    print_search_result(result_list)
+
+def print_search_result(result_list):
+    for i in result_list:
+        print()
+        print(i)
             
 '''def printDays(list):
     for day in day_list:
@@ -42,5 +41,5 @@ def seach_precipitation( year, month):
 
 printDays(day_list)'''
 
-teste = seach_precipitation(1961, 1)
+teste = seach_precipitation(1961, 4)
 print(teste)
