@@ -63,14 +63,15 @@ def opcao_precipitação():
     
     #funções alinhadas devem ficar dentro da função principal
     def print_lista_resultante(lista_resultante):
+        if len((lista_resultante)) == 0 : print("Não há dados para o período informado.")
+        else:
             for i in lista_resultante:
                 print(f"No dia {i[0]} a precipitação foi de: {i[1]}")
                 print()
-    # define a função procura_precipitacao para procurar por informações de precipitação de um determinado ano e mês
-    #funções alinhadas devem ficar dentro da função principal
+        # define a função procura_precipitacao para procurar por informações de precipitação de um determinado ano e mês
+        #funções alinhadas devem ficar dentro da função principal
     
     def procura_precipitacao(ano, mes):
-        
         lista_resultante = []
         # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a lista_resultante
         for i in range(len(day_list)):
