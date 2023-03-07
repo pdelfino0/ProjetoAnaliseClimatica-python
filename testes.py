@@ -44,11 +44,18 @@ def get_nome_mes(mes):
 # define a função print_search_result para imprimir os resultados de pesquisa
 
 
-def print_search_result(result_list):
+def print_resultado_pesquisa_temperatura(result_list):
+    cont = 0
+    cont_meses = 2
+    print("Janeiro")
     for i in result_list:
-        print()
+        if i[0][:2] == "08" and i[0][3:5] == "12": break
         print(i)
-
+        cont += 1
+        if cont == 8:
+            print(get_nome_mes(cont_meses))
+            cont = 0
+            cont_meses += 1
 
 def opcao_precipitação():
 
@@ -92,14 +99,8 @@ def busca_temperatura_maxima():
         if (day_list[i][0][6:]) == str(ano) and (day_list[i][0][4:5] in meses) and (day_list[i][0][:2] in dias):
             result_list.append((day_list[i][0], day_list[i][1][1]))
     # chama a função print_search_result para exibir os resultados
-    print_search_result(result_list)
-    # print(day_list[15][0][:2])
+    print_resultado_pesquisa_temperatura(result_list)
 
-
-    def print_max_tempeature_search(result_list):
-        for i in result_list:
-            print()
-            print(i)
 
 # exibe o menu para o usuário
 
