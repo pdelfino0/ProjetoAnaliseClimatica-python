@@ -44,55 +44,82 @@ def get_nome_mes(mes):
 # define a função print_search_result para imprimir os resultados de pesquisa
 
 
-def print_search_result(result_list):
+def print_resultado_pesquisa_temperatura(result_list):
+    cont = 0
+    cont_meses = 2
+    print("Janeiro")
     for i in result_list:
-        print()
+        if i[0][:2] == "08" and i[0][3:5] == "12": break
         print(i)
+        cont += 1
+        if cont == 8:
+            print(get_nome_mes(cont_meses))
+            cont = 0
+            cont_meses += 1
 
-'''
+def opcao_precipitação():
+
+    print("Selecione um mês e um ano:")
+    print("1 - Janeiro")
+    print("2 - Fevereiro")
+    print("3 - Março")
+    print("4 - Abril")
+    print("5 - Maio")
+    print("6 - Junho")
+    print("7 - Julho")
+    print("8 - Agosto")
+    print("9 - Setembro")
+    print("10 - Outubro")
+    print("11 - Novembro")
+    print("12 - Dezembro")
+
+    # solicita ao usuário que selecione um mês e verifica se a entrada é válida
+    mes = 0
+    while mes < 1 or mes > 12:
+        mes = int(input("Digite o número do mês desejado: "))
+        if mes < 1 or mes > 12:
+            print("Valor inválido! Tente novamente.")
+
+    # solicita ao usuário que insira um ano
+    ano = int(input("Digite o ano desejado: "))
+    # exibindo o resultado
+    print("Você selecionou o mês de", get_nome_mes(mes), "de", ano)
+
+    search_precipitation(ano, mes)
+
+def busca_temperatura_maxima():
+    
+    ano = input("Digite o ano que você quer buscar: ")
+    
+    dias = "01,02,03,04,05,06,07,08"
+    meses = "01,02,03,04,05,06,07,08,09,10,11,12"
+    result_list = []
+    # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a result_list
+    for i in range(len(day_list)):
+        if (day_list[i][0][6:]) == str(ano) and (day_list[i][0][4:5] in meses) and (day_list[i][0][:2] in dias):
+            result_list.append((day_list[i][0], day_list[i][1][1]))
+    # chama a função print_search_result para exibir os resultados
+    print_resultado_pesquisa_temperatura(result_list)
+
+
 # exibe o menu para o usuário
-print("Selecione um mês e um ano:")
-print("1 - Janeiro")
-print("2 - Fevereiro")
-print("3 - Março")
-print("4 - Abril")
-print("5 - Maio")
-print("6 - Junho")
-print("7 - Julho")
-print("8 - Agosto")
-print("9 - Setembro")
-print("10 - Outubro")
-print("11 - Novembro")
-print("12 - Dezembro")
 
-# solicita ao usuário que selecione um mês e verifica se a entrada é válida
-mes = 0
-while mes < 1 or mes > 12:
-    mes = int(input("Digite o número do mês desejado: "))
-    if mes < 1 or mes > 12:
-        print("Valor inválido! Tente novamente.")
+print("O que você gostaria de pesquisar?")
 
-# solicita ao usuário que insira um ano
-ano = int(input("Digite o ano desejado: "))
-# exibindo o resultado
-print("Você selecionou o mês de", get_nome_mes(mes), "de", ano)
+op = 0
+while True:
+    print("1 para precipitação de um determinado mês de um determinado ano.")
+    print("2 para pesquisa de temperaturas máximas nos primeiros 7 dias de cada mês em um ano.")
+    op = input()
+    if op != "1" and op != "2":
+        print("Opção inválida. Tente novamente.")
+    else:
+        break
 
-search_precipitation(ano, mes)'''
+if op == 1:
+    opcao_precipitação()
+    
+else:
+    busca_temperatura_maxima()
 
 
-dias = "01,02,03,04,05,06,07,08"
-meses = "01,02,03,04,05,06,07,08,09,10,11,12"
-ano = 1961
-result_list = []
-# para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a result_list
-for i in range(len(day_list)):
-    if (day_list[i][0][6:]) == str(1961) and (day_list[i][0][4:5] in meses) and (day_list[i][0][:2] in dias):
-        result_list.append((day_list[i][0],day_list[i][1][1]))
-# chama a função print_search_result para exibir os resultados
-print_search_result(result_list)
-#print(day_list[15][0][:2])
-
-def print_max_tempeature_search(result_list):
-    for i in result_list:
-        print()
-        print(i)
