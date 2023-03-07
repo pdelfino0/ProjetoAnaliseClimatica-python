@@ -21,20 +21,6 @@ for line in data:
     day = [line[0], informations]
     day_list.append(day)
 
-# define a função search_precipitation para procurar por informações de precipitação de um determinado ano e mês
-def print_search_result(result_list):
-    for i in result_list:
-        print(f"No dia {i[0]} a precipitação foi de: {i[1]}")
-        print()
-
-def search_precipitation(year, month):
-    result_list = []
-    # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a result_list
-    for i in range(len(day_list)):
-        if ((day_list[i][0][6:]) == str(year)) and ((day_list[i][0][4:5]) == str(month)):
-            result_list.append((day_list[i][0],day_list[i][1][0]))
-    # chama a função print_search_result para exibir os resultados
-    print_search_result(result_list)
 
 # define a função auxiliar get_nome_mes para obter o nome do mês correspondente a um número de mês
 
@@ -73,6 +59,26 @@ def print_resultado_pesquisa_temperatura(result_list):
             
 #inicia a pesquisa solicitada
 def opcao_precipitação():
+    
+    
+    #funções alinhadas devem ficar dentro da função principal
+    def print_search_result(result_list):
+            for i in result_list:
+                print(f"No dia {i[0]} a precipitação foi de: {i[1]}")
+                print()
+    # define a função search_precipitation para procurar por informações de precipitação de um determinado ano e mês
+    #funções alinhadas devem ficar dentro da função principal
+    
+    def search_precipitation(year, month):
+        
+        result_list = []
+        # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a result_list
+        for i in range(len(day_list)):
+            if ((day_list[i][0][6:]) == str(year)) and ((day_list[i][0][4:5]) == str(month)):
+                result_list.append((day_list[i][0],day_list[i][1][0]))
+        # chama a função print_search_result para exibir os resultados
+        print_search_result(result_list)
+
 
     print("Selecione um mês e um ano:")
     print("1 - Janeiro")
