@@ -22,24 +22,20 @@ for line in data:
     day_list.append(day)
 
 
-def seach_precipitation( year, month):
+def seach_precipitation(year, month):
     result_list = []
     for i in range(len(day_list)):
-        if ((day_list[i][0][6:]) == str(year)) and ((day_list[i][0][6:]) == str(month)):
-            #print((day_list[i][0][6:]))
+        if ((day_list[i][0][6:]) == str(year)) and ((day_list[i][0][4:5]) == str(month)):
+            # print((day_list[i][0][6:]))
             result_list.append((day_list[i]))
     print_search_result(result_list)
+
 
 def print_search_result(result_list):
     for i in result_list:
         print()
         print(i)
-            
-'''def printDays(list):
-    for day in day_list:
-        print(day)
 
-printDays(day_list)'''
 
 teste = seach_precipitation(1961, 4)
 print(teste)
