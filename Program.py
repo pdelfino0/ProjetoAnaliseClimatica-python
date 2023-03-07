@@ -18,8 +18,8 @@ day_list = []
 for line in data:
     informations = (line[1], line[2], line[3],
                     line[4], line[5], line[6], line[7])
-    day = [line[0], informations]
-    day_list.append(day)
+    dia = [line[0], informations]
+    day_list.append(dia)
 
 
 # define a função auxiliar get_nome_mes para obter o nome do mês correspondente a um número de mês
@@ -62,22 +62,22 @@ def opcao_precipitação():
     
     
     #funções alinhadas devem ficar dentro da função principal
-    def print_search_result(lista_resultante):
+    def print_lista_resultante(lista_resultante):
             for i in lista_resultante:
                 print(f"No dia {i[0]} a precipitação foi de: {i[1]}")
                 print()
-    # define a função search_precipitation para procurar por informações de precipitação de um determinado ano e mês
+    # define a função procura_precipitacao para procurar por informações de precipitação de um determinado ano e mês
     #funções alinhadas devem ficar dentro da função principal
     
-    def search_precipitation(ano, mes):
+    def procura_precipitacao(ano, mes):
         
         lista_resultante = []
         # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a lista_resultante
         for i in range(len(day_list)):
             if ((day_list[i][0][6:]) == str(ano)) and ((day_list[i][0][4:5]) == str(mes)):
                 lista_resultante.append((day_list[i][0],day_list[i][1][0]))
-        # chama a função print_search_result para exibir os resultados
-        print_search_result(lista_resultante)
+        # chama a função print_lista_resultante para exibir os resultados
+        print_lista_resultante(lista_resultante)
 
 
     print("Selecione um mês e um ano:")
@@ -105,7 +105,7 @@ def opcao_precipitação():
     ano = int(input("Digite o ano desejado: "))
     # exibindo o resultado
     print("Você selecionou o mês de", get_nome_mes(mes), "de", ano)
-    search_precipitation(ano, mes)
+    procura_precipitacao(ano, mes)
 
 # Define uma função que busca as temperaturas máximas para os primeiros 7 dias de cada mês em um determinado ano.
 def busca_temperatura_maxima():
