@@ -22,7 +22,10 @@ for line in data:
     day_list.append(day)
 
 # define a função search_precipitation para procurar por informações de precipitação de um determinado ano e mês
-
+def print_search_result(result_list):
+    for i in result_list:
+        print(i)
+        print()
 
 def search_precipitation(year, month):
     result_list = []
@@ -110,8 +113,8 @@ op = 0
 while True:
     print("1 para precipitação de um determinado mês de um determinado ano.")
     print("2 para pesquisa de temperaturas máximas nos primeiros 7 dias de cada mês em um ano.")
-    op = input()
-    if op != "1" and op != "2":
+    op = int(input())
+    if op != 1 and op != 2:
         print("Opção inválida. Tente novamente.")
     else:
         break
@@ -119,7 +122,7 @@ while True:
 if op == 1:
     opcao_precipitação()
     
-else:
+if op == 2:
     busca_temperatura_maxima()
 
 
