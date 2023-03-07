@@ -24,7 +24,7 @@ for line in data:
 # define a função search_precipitation para procurar por informações de precipitação de um determinado ano e mês
 def print_search_result(result_list):
     for i in result_list:
-        print(i)
+        print(f"No dia {i[0]} a precipitação foi de: {i[1]}")
         print()
 
 def search_precipitation(year, month):
@@ -32,7 +32,7 @@ def search_precipitation(year, month):
     # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a result_list
     for i in range(len(day_list)):
         if ((day_list[i][0][6:]) == str(year)) and ((day_list[i][0][4:5]) == str(month)):
-            result_list.append((day_list[i]))
+            result_list.append((day_list[i][0],day_list[i][1][0]))
     # chama a função print_search_result para exibir os resultados
     print_search_result(result_list)
 
@@ -53,7 +53,7 @@ def print_resultado_pesquisa_temperatura(result_list):
     print("Janeiro")
     for i in result_list:
         if i[0][:2] == "08" and i[0][3:5] == "12": break
-        print(i)
+        print(f"No dia {i[0]} a temperatura foi {i[1]} C")
         cont += 1
         if cont == 8:
             print(get_nome_mes(cont_meses))
@@ -87,7 +87,6 @@ def opcao_precipitação():
     ano = int(input("Digite o ano desejado: "))
     # exibindo o resultado
     print("Você selecionou o mês de", get_nome_mes(mes), "de", ano)
-
     search_precipitation(ano, mes)
 
 def busca_temperatura_maxima():
