@@ -39,29 +39,39 @@ def search_precipitation(year, month):
 # define a função auxiliar get_nome_mes para obter o nome do mês correspondente a um número de mês
 
 
+# Define uma função que recebe o número do mês como parâmetro e retorna o nome correspondente.
 def get_nome_mes(mes):
     nomes_meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
                    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
-    return nomes_meses[mes - 1]
+    return nomes_meses[mes - 1] # retorna o nome do mês correspondente ao número passado como parâmetro, subtraindo 1 para ajustar ao índice da lista.
 
-# define a função print_search_result para imprimir os resultados de pesquisa
-
-
+# Define uma função para imprimir os resultados da pesquisa de temperatura máxima nos primeiros 7 dias de cada mês em um ano específico.
 def print_resultado_pesquisa_temperatura(result_list):
-    cont = 0
-    cont_meses = 2
-    print("Janeiro")
+    cont = 0 # contador de dias para imprimir o nome do próximo mês após 7 dias
+    cont_meses = 2 # contador de meses para imprimir o nome do próximo mês
+    print("Janeiro") # imprime o nome do primeiro mês
+
+    # Itera sobre a lista de resultados
     for i in result_list:
+        # Verifica se a data corresponde aos primeiros 7 dias do mês atual
         if i[0][:2] == "07" and i[0][3:5] == "12": 
+            # Se a data estiver dentro dos primeiros 7 dias do mês atual, imprime a data e a temperatura máxima registrada para essa data
             print(f"No dia {i[0]} a temperatura foi {i[1]} C")
+            # Interrompe o loop for se encontrar a primeira data que está fora dos primeiros 7 dias do último mês que está imprimindo
             break
+        # Se a data estiver dentro dos primeiros 7 dias do mês atual, imprime a data e a temperatura máxima registrada para essa data
         print(f"No dia {i[0]} a temperatura foi {i[1]} C")
+        # Incrementa o contador de dias
         cont += 1
+        # Se o contador de dias atingir 7, imprime o nome do próximo mês e redefine o contador de dias para 0
         if cont == 7:
             print(get_nome_mes(cont_meses))
             cont = 0
+            # Incrementa o contador de meses
             cont_meses += 1
 
+            
+#inicia a pesquisa solicitada
 def opcao_precipitação():
 
     print("Selecione um mês e um ano:")
@@ -91,25 +101,32 @@ def opcao_precipitação():
     print("Você selecionou o mês de", get_nome_mes(mes), "de", ano)
     search_precipitation(ano, mes)
 
+# Define uma função que busca as temperaturas máximas para os primeiros 7 dias de cada mês em um determinado ano.
 def busca_temperatura_maxima():
     
+    # A função recebe um ano como entrada do usuário e cria duas strings, dias e meses, que contêm os dias e meses a serem pesquisados. 
     ano = input("Digite o ano que você quer buscar: ")
     
     dias = "01,02,03,04,05,06,07"
     meses = "01,02,03,04,05,06,07,08,09,10,11,12"
     result_list = []
+    
+    # Um loop for é usado para verificar se a data correspondente em day_list (uma lista de tuplas contendo datas e temperaturas) atende aos critérios de busca.
     # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a result_list
     for i in range(len(day_list)):
+        # Se a data corresponder aos critérios, ela é adicionada a uma lista de resultados.
         if (day_list[i][0][6:]) == str(ano) and (day_list[i][0][4:5] in meses) and (day_list[i][0][:2] in dias):
             result_list.append((day_list[i][0], day_list[i][1][1]))
-    # chama a função print_search_result para exibir os resultados
+            
+    # Por fim, a função chama outra função para imprimir os resultados da pesquisa.
     print_resultado_pesquisa_temperatura(result_list)
 
 
-# exibe o menu para o usuário
 
+# Exibe um menu para o usuário escolher qual tipo de pesquisa deseja fazer. 
 print("O que você gostaria de pesquisar?")
 
+# O loop while garante que apenas uma opção válida seja selecionada e, em seguida, 
 op = 0
 while True:
     print("1 para precipitação de um determinado mês de um determinado ano.")
@@ -119,6 +136,8 @@ while True:
         print("Opção inválida. Tente novamente.")
     else:
         break
+
+# chama a função correspondente com base na escolha do usuário.
 
 if op == 1:
     opcao_precipitação()
