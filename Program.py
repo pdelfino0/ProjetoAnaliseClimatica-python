@@ -52,10 +52,12 @@ def print_resultado_pesquisa_temperatura(result_list):
     cont_meses = 2
     print("Janeiro")
     for i in result_list:
-        if i[0][:2] == "08" and i[0][3:5] == "12": break
+        if i[0][:2] == "07" and i[0][3:5] == "12": 
+            print(f"No dia {i[0]} a temperatura foi {i[1]} C")
+            break
         print(f"No dia {i[0]} a temperatura foi {i[1]} C")
         cont += 1
-        if cont == 8:
+        if cont == 7:
             print(get_nome_mes(cont_meses))
             cont = 0
             cont_meses += 1
@@ -93,7 +95,7 @@ def busca_temperatura_maxima():
     
     ano = input("Digite o ano que você quer buscar: ")
     
-    dias = "01,02,03,04,05,06,07,08"
+    dias = "01,02,03,04,05,06,07"
     meses = "01,02,03,04,05,06,07,08,09,10,11,12"
     result_list = []
     # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a result_list
