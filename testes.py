@@ -8,6 +8,7 @@ def load_data(file_name):
         # retorna a lista de dados
         return data
 
+
 # chama a função load_data para carregar os dados do arquivo "ArquivoDadosProjeto.csv" e armazena-os na variável data
 data = load_data("ArquivoDadosProjeto.csv")
 
@@ -21,6 +22,8 @@ for line in data:
     day_list.append(day)
 
 # define a função search_precipitation para procurar por informações de precipitação de um determinado ano e mês
+
+
 def search_precipitation(year, month):
     result_list = []
     # para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a result_list
@@ -31,17 +34,22 @@ def search_precipitation(year, month):
     print_search_result(result_list)
 
 # define a função auxiliar get_nome_mes para obter o nome do mês correspondente a um número de mês
+
+
 def get_nome_mes(mes):
     nomes_meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
                    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
     return nomes_meses[mes - 1]
 
 # define a função print_search_result para imprimir os resultados de pesquisa
+
+
 def print_search_result(result_list):
     for i in result_list:
         print()
         print(i)
 
+'''
 # exibe o menu para o usuário
 print("Selecione um mês e um ano:")
 print("1 - Janeiro")
@@ -69,7 +77,22 @@ ano = int(input("Digite o ano desejado: "))
 # exibindo o resultado
 print("Você selecionou o mês de", get_nome_mes(mes), "de", ano)
 
-search_precipitation(ano, mes)
+search_precipitation(ano, mes)'''
 
 
+dias = "01,02,03,04,05,06,07,08"
+meses = "01,02,03,04,05,06,07,08,09,10,11,12"
+ano = 1961
+result_list = []
+# para cada dia em day_list, verifica se o ano e mês correspondem ao que está sendo procurado e adiciona a correspondência a result_list
+for i in range(len(day_list)):
+    if (day_list[i][0][6:]) == str(1961) and (day_list[i][0][4:5] in meses) and (day_list[i][0][:2] in dias):
+        result_list.append((day_list[i][0],day_list[i][1][1]))
+# chama a função print_search_result para exibir os resultados
+print_search_result(result_list)
+#print(day_list[15][0][:2])
 
+def print_max_tempeature_search(result_list):
+    for i in result_list:
+        print()
+        print(i)
