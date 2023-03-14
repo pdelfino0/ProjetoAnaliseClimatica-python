@@ -21,9 +21,34 @@ for line in data:
     dia = [line[0], informations]
     day_list.append(dia)
 
+def busca_maior_precipitacao_mensal():
+    
+    def encontra_mes_mais_chuvoso(precipitacao):
+        
+        mes_mais_chuvoso = max(precipitacao, key = lambda k: precipitacao[k])
+        mes,ano = mes_mais_chuvoso.split("/")
+        
+        return f"{mes}/{ano}"
+        
+    def precipitacao_mes_mais_chuvoso(precipitacao):
+                
+        mes_mais_chuvoso = max(precipitacao, key = lambda k: precipitacao[k])
+        maior_precipitacao_mensal = precipitacao[mes_mais_chuvoso]
+        
+        return maior_precipitacao_mensal
+    
+    dicionario_precipitacao = {}
+    for day in day_list:
+        ano = day[0][6:] # extrair o ano da string da data
+        mes = day[0][3:5] # extrair o mês da string da data
+        precipitacao_hoje = float(day[1][0]) # extrair o valor diário de precipitação como um float
+        chave_do_dicionario = f"{mes}/{ano}" # criar uma chave no formato "MM/AAAA"
+        # usar o método get() para recuperar o valor da chave (se ela existir), ou definir um valor padrão de 0 (se ela não existir), e adicionar o valor diário de precipitação a ele
+        dicionario_precipitacao[chave_do_dicionario] = dicionario_precipitacao.get(chave_do_dicionario, 0) + precipitacao_hoje
 
-# define a função auxiliar get_nome_mes para obter o nome do mês correspondente a um número de mês
-
+    mes_mais_chuvoso = encontra_mes_mais_chuvoso(dicionario_precipitacao)
+    maior_precipitacao_mensal = precipitacao_mes_mais_chuvoso(dicionario_precipitacao)
+    print(f"O mês mais chuvoso de todo o período foi {mes_mais_chuvoso}, com {maior_precipitacao_mensal:5.2f} mm de chuva")
 
 # Define uma função que recebe o número do mês como parâmetro e retorna o nome correspondente.
 def get_nome_mes(mes):
@@ -59,7 +84,6 @@ def print_resultado_pesquisa_temperatura(lista_resultante):
             
 #inicia a pesquisa solicitada
 def opcao_precipitação():
-    
     
     #funções alinhadas devem ficar dentro da função principal
     def print_lista_resultante(lista_resultante):
@@ -138,8 +162,9 @@ op = 0
 while True:
     print("1 para precipitação de um determinado mês de um determinado ano.")
     print("2 para pesquisa de temperaturas máximas nos primeiros 7 dias de cada mês em um ano.")
+    print("3 para descobrir o mês mais chuvoso de todo o período.")
     op = int(input())
-    if op != 1 and op != 2:
+    if op != 1 and op != 2 and op != 3:
         print("Opção inválida. Tente novamente.")
     else:
         break
@@ -151,5 +176,9 @@ if op == 1:
     
 if op == 2:
     busca_temperatura_maxima()
+    
+if op == 3:
+    busca_maior_precipitacao_mensal_mensal()
+        
 
 
