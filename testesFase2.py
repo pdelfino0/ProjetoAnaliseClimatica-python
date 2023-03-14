@@ -21,20 +21,33 @@ for line in data:
     dia = [line[0], informations]
     day_list.append(dia)
 
+def busca_precipitacao_mensal():
+    
+    def encontra_mes_mais_chuvoso(precipitacao):
+        
+        mes_mais_chuvoso = max(precipitacao, key = lambda k: precipitacao[k])
+        mes,ano = mes_mais_chuvoso.split("/")
+        
+        return f"{mes}/{ano}"
+        
+    def precipitacao_mes_mais_chuvoso(precipitacao):
+                
+        mes_mais_chuvoso = max(precipitacao, key = lambda k: precipitacao[k])
+        maior_precipitacao_mensal = precipitacao[mes_mais_chuvoso]
+        
+        return maior_precipitacao_mensal
+    
+    dicionario_precipitacao = {}
+    for day in day_list:
+        ano = day[0][6:] # extrair o ano da string da data
+        mes = day[0][3:5] # extrair o mês da string da data
+        precipitacao_hoje = float(day[1][0]) # extrair o valor diário de precipitação como um float
+        chave_do_dicionario = f"{mes}/{ano}" # criar uma chave no formato "MM/AAAA"
+        # usar o método get() para recuperar o valor da chave (se ela existir), ou definir um valor padrão de 0 (se ela não existir), e adicionar o valor diário de precipitação a ele
+        dicionario_precipitacao[chave_do_dicionario] = dicionario_precipitacao.get(chave_do_dicionario, 0) + precipitacao_hoje
 
-'''dic= {}
-#for i in day_list:
-    ano = day_list[0][0][6:]
-    mes = day_list[0][0][3:5]
-    day_precipitation = day_list[0][1][1]
-    dic_Index = ano + "/" + mes
-    dic.get
-    dic[dic_Index] = 
+    mes_mais_chuvoso = encontra_mes_mais_chuvoso(dicionario_precipitacao)
+    maior_precipitacao_mensal = precipitacao_mes_mais_chuvoso(dicionario_precipitacao)
+    print(f"O mês mais chuvoso de todo o período foi {mes_mais_chuvoso}, com {maior_precipitacao_mensal:5.2f} mm de chuva")
 
-print(day_list[0][0][6:])
-print(day_list[0][0][3:5])
-print(day_list[0][1][1])
-'''
-
-dic = {'marco/2023': 220}
-print(dic.get('marco/2023',0))
+busca_precipitacao_mensal()
