@@ -20,40 +20,41 @@ for line in data:
                     line[4], line[5], line[6], line[7])
     dia = [line[0], informations]
     day_list.append(dia)
-    
+
     def get_nome_mes(mes):
         nomes_meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-                    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
-        return nomes_meses[mes - 1] # retorna o nome do mês correspondente ao número passado como parâmetro, subtraindo 1 para ajustar ao índice da lista.
+                       "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+        # retorna o nome do mês correspondente ao número passado como parâmetro, subtraindo 1 para ajustar ao índice da lista.
+        return nomes_meses[mes - 1]
 
 
-def busca_precipitacao_mensal():
-    
-    def encontra_mes_mais_chuvoso(precipitacao):
-        
-        mes_mais_chuvoso = max(precipitacao, key = lambda k: precipitacao[k])
-        mes,ano = mes_mais_chuvoso.split("/")
-        
-        return f"{get_nome_mes(int(mes))}/{ano}"
-        
-    def precipitacao_mes_mais_chuvoso(precipitacao):
-                
-        mes_mais_chuvoso = max(precipitacao, key = lambda k: precipitacao[k])
-        maior_precipitacao_mensal = precipitacao[mes_mais_chuvoso]
-        
-        return maior_precipitacao_mensal
-    
-    dicionario_precipitacao = {}
-    for day in day_list:
-        ano = day[0][6:] # extrair o ano da string da data
-        mes = day[0][3:5] # extrair o mês da string da data
-        precipitacao_hoje = float(day[1][0]) # extrair o valor diário de precipitação como um float
-        chave_do_dicionario = f"{mes}/{ano}" # criar uma chave no formato "MM/AAAA"
-        # usar o método get() para recuperar o valor da chave (se ela existir), ou definir um valor padrão de 0 (se ela não existir), e adicionar o valor diário de precipitação a ele
-        dicionario_precipitacao[chave_do_dicionario] = dicionario_precipitacao.get(chave_do_dicionario, 0) + precipitacao_hoje
+decada_determinada = ["2006", "2007", "2008", "2009",
+                      "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
 
-    mes_mais_chuvoso = encontra_mes_mais_chuvoso(dicionario_precipitacao)
-    maior_precipitacao_mensal = precipitacao_mes_mais_chuvoso(dicionario_precipitacao)
-    print(f"O mês mais chuvoso de todo o período foi {mes_mais_chuvoso}, com {maior_precipitacao_mensal:5.2f} mm de chuva")
+temp_min = []
+um_relativa = []
+vel_vento = []
 
-busca_precipitacao_mensal()
+soma_temp_min = 0.0
+soma_vel_vento = 0.0
+soma_um_relativa = 0.0
+cont = 0
+for day in day_list:
+    ano = day[0][6:]  # extrair o ano da string da data
+    mes = day[0][3:5]  # extrair o mês da string da data
+    if mes == "06" and ano in decada_determinada:
+        temp_min.append((day[1][2]))
+        um_relativa.append((day[1][5]))
+        vel_vento.append((day[1][6]))
+
+        soma_temp_min = soma_temp_min + float(day[1][2])
+        soma_um_relativa = soma_um_relativa + float(day[1][5])
+        soma_vel_vento = soma_vel_vento + float(day[1][6])
+        cont += 1
+
+media_temp_min = soma_temp_min / cont
+media_vel_vento = soma_vel_vento / cont
+media_um_relativa = soma_um_relativa / cont
+print(f"{media_temp_min:5.1f}C")
+print(f"{media_vel_vento:5.1f}")
+print(f"{media_um_relativa:5.1f}")
