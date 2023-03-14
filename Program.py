@@ -28,7 +28,7 @@ def busca_maior_precipitacao_mensal():
         mes_mais_chuvoso = max(precipitacao, key = lambda k: precipitacao[k])
         mes,ano = mes_mais_chuvoso.split("/")
         
-        return f"{mes}/{ano}"
+        return f"{get_nome_mes(int(mes))}/{ano}"
         
     def precipitacao_mes_mais_chuvoso(precipitacao):
                 
@@ -178,7 +178,7 @@ if op == 2:
     busca_temperatura_maxima()
     
 if op == 3:
-    busca_maior_precipitacao_mensal_mensal()
+    busca_maior_precipitacao_mensal()
         
 
 

@@ -20,6 +20,12 @@ for line in data:
                     line[4], line[5], line[6], line[7])
     dia = [line[0], informations]
     day_list.append(dia)
+    
+    def get_nome_mes(mes):
+        nomes_meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+        return nomes_meses[mes - 1] # retorna o nome do mês correspondente ao número passado como parâmetro, subtraindo 1 para ajustar ao índice da lista.
+
 
 def busca_precipitacao_mensal():
     
@@ -28,7 +34,7 @@ def busca_precipitacao_mensal():
         mes_mais_chuvoso = max(precipitacao, key = lambda k: precipitacao[k])
         mes,ano = mes_mais_chuvoso.split("/")
         
-        return f"{mes}/{ano}"
+        return f"{get_nome_mes(int(mes))}/{ano}"
         
     def precipitacao_mes_mais_chuvoso(precipitacao):
                 
