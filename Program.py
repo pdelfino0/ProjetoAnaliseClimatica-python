@@ -194,6 +194,43 @@ def busca_informacoes_auge_inverno():
     print(f"A média da umidade relativa do ar no mês de Junho durante a década de 2006 a 2016 foi de {media_um_relativa:2.1f} %, com moda de {float(moda_um_relativa)} %")
     print(f"A média da velócidade do vento no mês de Junho durante a década de 2006 a 2016 foi de {media_vel_vento:2.1f} m/s, com moda de {float(moda_vel_vento):.1f} m/s")
 
+def precipitacao_acumulada_decadas():
+    
+    def print_resultado_precipitacao_acumulada():
+        for chave in dicionario:
+            print(f"Na {chave}, a precipitação foi de {dicionario[chave]} mm")
+    
+    dicionario = {}
+
+    anos_decada_1 = ["61","62","63","64","65","66","67","68","69","70"]
+    anos_decada_2 = ["71", "72", "73", "74", "75", "76", "77", "78", "79","80"]
+    anos_decada_3 = ["81", "82", "83", "84", "85", "86", "87", "88", "89", "90"]
+    anos_decada_4 = ["91", "92", "93", "94", "95", "96", "97", "98", "99", "00"]
+    anos_decada_5 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
+    anos_decada_6 = ["11","12","13","14","15","16"]
+
+    for day in day_list:
+        ano = day[0][8:]
+        if ano in anos_decada_1:chave_dicionario = "Decada 1"
+        elif ano in anos_decada_2:chave_dicionario = "Decada 2"
+        elif ano in anos_decada_3:chave_dicionario = "Decada 3"
+        elif ano in anos_decada_4:chave_dicionario = "Decada 4"
+        elif ano in anos_decada_5:chave_dicionario = "Decada 5"
+        else: chave_dicionario = "Decada 6"
+        precipitacao_hoje = float(day[1][0])
+        dicionario[chave_dicionario] = (dicionario.get(chave_dicionario, 0) + precipitacao_hoje)
+        
+
+    for chave in dicionario:
+        if chave == "Decada 6": anos = len(anos_decada_6)
+        else: anos = 10
+        dicionario[chave] /= anos
+        dicionario[chave] = round(dicionario[chave],1)
+        
+        
+    print_resultado_precipitacao_acumulada()
+
+
 
 # Exibe um menu para o usuário escolher qual tipo de pesquisa deseja fazer. 
 print("O que você gostaria de pesquisar?")
@@ -205,9 +242,10 @@ while True:
     print("2 para exibir temperaturas máximas nos primeiros 7 dias de cada mês de um ano.")
     print("3 para exibir o mês mais chuvoso de todo o período.")
     print("4 para exibir informações sobre umidade relativa do ar, temperatura mínima e velocidade do vento na década de 2006 a 2016")
+    print("5 para exibir a média de precipitação acumulada anual por décadas")
     
     op = int(input())
-    if op != 1 and op != 2 and op != 3 and op != 4:
+    if op != 1 and op != 2 and op != 3 and op != 4 and op != 5:
         print("Opção inválida. Tente novamente.")
     else:
         break
@@ -225,6 +263,8 @@ if op == 3:
     
 if op == 4:
     busca_informacoes_auge_inverno()
-        
+
+if op== 5:
+    precipitacao_acumulada_decadas()
 
 
