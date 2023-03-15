@@ -159,49 +159,59 @@ def busca_informacoes_auge_inverno():
     decada_determinada = ["2006", "2007", "2008", "2009",
                         "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
 
-    temp_min = []
-    um_relativa = []
-    vel_vento = []
+    temp_min = [] # Lista para armazenar as temperaturas mínimas
+    um_relativa = []  # Lista para armazenar a umidade relativa do ar
+    vel_vento = [] # Lista para armazenar a velocidade do vento
 
-    soma_temp_min = 0.0
-    soma_vel_vento = 0.0
-    soma_um_relativa = 0.0
-    cont = 0
+    soma_temp_min = 0.0 # Variável para armazenar a soma das temperaturas mínimas
+    soma_vel_vento = 0.0 # Variável para armazenar a soma das velocidades do vento
+    soma_um_relativa = 0.0 # Variável para armazenar a soma da umidade relativa do ar
+    cont = 0  # Variável para contar o número de dias que correspondem aos critérios de seleção
+    
+     # Loop para percorrer a lista de dias e extrair as informações relevantes
     for day in day_list:
         ano = day[0][6:]  # extrair o ano da string da data
         mes = day[0][3:5]  # extrair o mês da string da data
+        
+        # Verifica se o mês é junho e se o ano está na década determinada
         if mes == "06" and ano in decada_determinada:
-            temp_min.append((day[1][2]))
-            um_relativa.append((day[1][5]))
-            vel_vento.append((day[1][6]))
+            temp_min.append((day[1][2]))  # Adiciona a temperatura mínima na lista correspondente
+            um_relativa.append((day[1][5])) # Adiciona a umidade relativa do ar na lista correspondente
+            vel_vento.append((day[1][6])) # Adiciona a velocidade do vento na lista correspondente
 
-            soma_temp_min +=  float(day[1][2])
-            soma_um_relativa += float(day[1][5])
-            soma_vel_vento += float(day[1][6])
-            cont += 1
-
+            soma_temp_min +=  float(day[1][2]) # Soma as temperaturas mínimas
+            soma_um_relativa += float(day[1][5]) # Soma a umidade relativa do ar
+            soma_vel_vento += float(day[1][6]) # Soma as velocidades do vento
+            cont += 1 # Incrementa o contador
+            
+     # Calcula as médias das temperaturas mínimas, umidade relativa do ar e velocidades do vento
     media_temp_min = soma_temp_min / cont
     media_vel_vento = soma_vel_vento / cont
     media_um_relativa = soma_um_relativa / cont
 
     import statistics
 
+    # Calcula as modas das temperaturas mínimas, umidade relativa do ar e velocidades do vento
     moda_temp_min = statistics.mode(temp_min)
     moda_um_relativa = statistics.mode(um_relativa)
     moda_vel_vento = statistics.mode(vel_vento)
     
+    # Imprime as informações na tela
     print(f"A média da temperatura mínima no mês de Junho durante a década de 2006 a 2016 foi de {media_temp_min:2.1f} °C, com moda de {float(moda_temp_min)} °C")
     print(f"A média da umidade relativa do ar no mês de Junho durante a década de 2006 a 2016 foi de {media_um_relativa:2.1f} %, com moda de {float(moda_um_relativa)} %")
     print(f"A média da velócidade do vento no mês de Junho durante a década de 2006 a 2016 foi de {media_vel_vento:2.1f} m/s, com moda de {float(moda_vel_vento):.1f} m/s")
 
 def precipitacao_acumulada_decadas():
     
+     # função aninhada para imprimir os resultados
     def print_resultado_precipitacao_acumulada():
         for chave in dicionario:
             print(f"Na {chave}, a precipitação foi de {dicionario[chave]} mm")
-    
+            
+    # inicializa um dicionário vazio para armazenar a precipitação acumulada por década
     dicionario = {}
 
+    # define listas de anos que pertencem a cada década do período
     anos_decada_1 = ["61","62","63","64","65","66","67","68","69","70"]
     anos_decada_2 = ["71", "72", "73", "74", "75", "76", "77", "78", "79","80"]
     anos_decada_3 = ["81", "82", "83", "84", "85", "86", "87", "88", "89", "90"]
@@ -209,6 +219,8 @@ def precipitacao_acumulada_decadas():
     anos_decada_5 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"]
     anos_decada_6 = ["11","12","13","14","15","16"]
 
+    # loop pelos dias na lista de entrada, extrai o ano da data e atribui a década correspondente
+    # à variável "chave_dicionario"
     for day in day_list:
         ano = day[0][8:]
         if ano in anos_decada_1:chave_dicionario = "Decada 1"
@@ -217,17 +229,21 @@ def precipitacao_acumulada_decadas():
         elif ano in anos_decada_4:chave_dicionario = "Decada 4"
         elif ano in anos_decada_5:chave_dicionario = "Decada 5"
         else: chave_dicionario = "Decada 6"
+        #extrai o valor da precipitação para aquele dia, adiciona ao total de precipitação
         precipitacao_hoje = float(day[1][0])
+        #atribui o resultado à chave correspondente no dicionário
         dicionario[chave_dicionario] = (dicionario.get(chave_dicionario, 0) + precipitacao_hoje)
         
-
+    # loop pelas chaves no dicionário e calcula a precipitação média para cada década
     for chave in dicionario:
         if chave == "Decada 6": anos = len(anos_decada_6)
         else: anos = 10
+        # dividindo a precipitação total pelo número de anos naquela década (seja 10 ou 6),
         dicionario[chave] /= anos
+        # e arredonda o resultado para uma casa decimal
         dicionario[chave] = round(dicionario[chave],1)
         
-        
+    #chama a função responsável por imprimir o resultado final em um formato legível para o usuário.
     print_resultado_precipitacao_acumulada()
 
 
@@ -251,7 +267,6 @@ while True:
         break
 
 # chama a função correspondente com base na escolha do usuário.
-
 if op == 1:
     opcao_precipitação()
     
