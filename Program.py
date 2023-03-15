@@ -90,7 +90,7 @@ def opcao_precipitação():
         if len((lista_resultante)) == 0 : print("Não há dados para o período informado.")
         else:
             for i in lista_resultante:
-                print(f"No dia {i[0]} a precipitação foi de: {i[1]}")
+                print(f"No dia {i[0]} a precipitação foi de: {i[1]} mm")
                 print()
         # define a função procura_precipitacao para procurar por informações de precipitação de um determinado ano e mês
         #funções alinhadas devem ficar dentro da função principal
@@ -151,7 +151,48 @@ def busca_temperatura_maxima():
             
     # Por fim, a função chama outra função para imprimir os resultados da pesquisa.
     print_resultado_pesquisa_temperatura(lista_resultante)
+    
+def busca_informacoes_auge_inverno():
+    
+    import statistics
+    
+    decada_determinada = ["2006", "2007", "2008", "2009",
+                        "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
 
+    temp_min = []
+    um_relativa = []
+    vel_vento = []
+
+    soma_temp_min = 0.0
+    soma_vel_vento = 0.0
+    soma_um_relativa = 0.0
+    cont = 0
+    for day in day_list:
+        ano = day[0][6:]  # extrair o ano da string da data
+        mes = day[0][3:5]  # extrair o mês da string da data
+        if mes == "06" and ano in decada_determinada:
+            temp_min.append((day[1][2]))
+            um_relativa.append((day[1][5]))
+            vel_vento.append((day[1][6]))
+
+            soma_temp_min +=  float(day[1][2])
+            soma_um_relativa += float(day[1][5])
+            soma_vel_vento += float(day[1][6])
+            cont += 1
+
+    media_temp_min = soma_temp_min / cont
+    media_vel_vento = soma_vel_vento / cont
+    media_um_relativa = soma_um_relativa / cont
+
+    import statistics
+
+    moda_temp_min = statistics.mode(temp_min)
+    moda_um_relativa = statistics.mode(um_relativa)
+    moda_vel_vento = statistics.mode(vel_vento)
+    
+    print(f"A média da temperatura mínima no mês de Junho durante a década de 2006 a 2016 foi de {media_temp_min:2.1f} °C, com moda de {float(moda_temp_min)} °C")
+    print(f"A média da umidade relativa do ar no mês de Junho durante a década de 2006 a 2016 foi de {media_um_relativa:2.1f} %, com moda de {float(moda_um_relativa)} %")
+    print(f"A média da velócidade do vento no mês de Junho durante a década de 2006 a 2016 foi de {media_vel_vento:2.1f} m/s, com moda de {float(moda_vel_vento):.1f} m/s")
 
 
 # Exibe um menu para o usuário escolher qual tipo de pesquisa deseja fazer. 
@@ -160,11 +201,13 @@ print("O que você gostaria de pesquisar?")
 # O loop while garante que apenas uma opção válida seja selecionada e, em seguida, 
 op = 0
 while True:
-    print("1 para precipitação de um determinado mês de um determinado ano.")
-    print("2 para pesquisa de temperaturas máximas nos primeiros 7 dias de cada mês em um ano.")
-    print("3 para descobrir o mês mais chuvoso de todo o período.")
+    print("1 para exibir a precipitação de um determinado mês de um determinado ano.")
+    print("2 para exibir temperaturas máximas nos primeiros 7 dias de cada mês de um ano.")
+    print("3 para exibir o mês mais chuvoso de todo o período.")
+    print("4 para exibir informações sobre umidade relativa do ar, temperatura mínima e velocidade do vento na década de 2006 a 2016")
+    
     op = int(input())
-    if op != 1 and op != 2 and op != 3:
+    if op != 1 and op != 2 and op != 3 and op != 4:
         print("Opção inválida. Tente novamente.")
     else:
         break
@@ -179,6 +222,9 @@ if op == 2:
     
 if op == 3:
     busca_maior_precipitacao_mensal()
+    
+if op == 4:
+    busca_informacoes_auge_inverno()
         
 
 
