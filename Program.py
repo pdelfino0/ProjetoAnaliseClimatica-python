@@ -203,6 +203,20 @@ def busca_informacoes_auge_inverno():
 
 def precipitacao_acumulada_decadas():
     
+    #função aninhada para montar e mostrar o código de barras
+    def mostrar_grafico_barras():
+        # Importa a biblioteca matplotlib para plotar o gráfico de barras    
+        import matplotlib.pyplot as plt
+        # Obtém os valores das médias de precipitação acumuladas do dicionário
+        valores = [valor for valor in dicionario.values()]
+        # Obtém as décadas do dicionário
+        decadas = [chaves for chaves in dicionario]
+        #Plota o gráfico de barras com as décadas no eixo x e as médias de precipitação acumuladas no eixo y
+        plt.bar(decadas, valores)
+        #Mostra o gráfico de barras na tela
+        plt.show()
+        
+    
      # função aninhada para imprimir os resultados
     def print_resultado_precipitacao_acumulada():
         for chave in dicionario:
@@ -245,6 +259,16 @@ def precipitacao_acumulada_decadas():
         
     #chama a função responsável por imprimir o resultado final em um formato legível para o usuário.
     print_resultado_precipitacao_acumulada()
+    
+    #oferece a opção ao usuário de ver ou não o gráfico de barras
+    op = int(input("Você gostaria de ver um gráfico de barras das médias de precipitação acumuladas das decadas? \n(1 para sim) \n(2 para não)\n"))
+    #valida a entrada do usuário
+    while True:
+        if op != 1 and op != 2:
+            op = int(input("Opção inválida, tente novamente! \n(1 para sim) \n(2 para não)\n "))
+        else: break
+    #chama a função para montar o grafico de barras e exibir
+    if op == 1: mostrar_grafico_barras()
 
 
 
